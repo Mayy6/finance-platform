@@ -1,0 +1,14 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <g fill="#C5A3FF">
+    <!-- Pie chart -->
+    <path d="M100,100 L100,30 A70,70 0 0,1 170,100 Z" />
+    <path d="M100,100 L100,170 A70,70 0 0,1 30,100 Z" />
+    <!-- Bar chart -->
+    <rect x="120" y="130" width="12" height="40" rx="2"/>
+    <rect x="140" y="110" width="12" height="60" rx="2"/>
+    <rect x="160" y="90" width="12" height="80" rx="2"/>
+    <!-- Arrow (trend line) -->
+    <polyline points="120,90 140,70 160,50" fill="none" stroke="#C5A3FF" stroke-width="3"/>
+    <polygon points="160,50 155,55 165,55" fill="#C5A3FF"/>
+  </g>
+</svg>
