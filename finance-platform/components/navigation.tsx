@@ -50,7 +50,7 @@ const Navigation = () => {
         return (
             <Sheet open={isopen} 
                 onOpenChange={setOpen}>
-                <SheetTrigger>
+                <SheetTrigger asChild>
                     <Button variant="purple"
                     size="lg"
                     className="focus:bg-white/30 transition font-normal left-1">

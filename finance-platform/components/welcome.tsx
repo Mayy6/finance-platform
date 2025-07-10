@@ -5,11 +5,11 @@ import { useUser }  from '@clerk/nextjs'
 export const Welcome = () => {
     const { user ,isLoaded } = useUser();
     return (
-        <div>
-            <h2>
-                Welcome bback
+        <div className='space-y-2 w-full'>
+            <h2 className='text-2xl font-semibold text-white'>
+                Welcome Back{isLoaded? "," :" "} {user?.firstName} 👋  
             </h2>
-            <p>This is your Financial Overview Report</p>
+            <p className='text-[#674789]'>This is your Financial Overview Report</p>
         </div>
     )
 
