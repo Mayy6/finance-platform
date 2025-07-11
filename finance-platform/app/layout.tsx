@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import signin from "@/app/(auth)/sign-in/[[...sign-in]]/page";
 import signup from "@/app/(auth)/sign-up/[[...sign-up]]/page";
+
+import { QueryProviders } from "@/provider/queryProvider";
 import {
   ClerkProvider,
   SignInButton,
@@ -38,7 +40,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <header>
-      
+        <QueryProviders>
+          {children}
+        </QueryProviders>
         
           
         </header>
