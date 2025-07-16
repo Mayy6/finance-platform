@@ -13,6 +13,9 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs'
+import { NewAccountSheet } from "@/features/accounts/api/components/new-account-sheet";
+import { SheetProvider } from "@/provider/sheetProvider";
+import { Toaster } from "sonner";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -41,12 +44,14 @@ export default function RootLayout({
       >
         <header>
         <QueryProviders>
+          <SheetProvider />
+          <Toaster />
           {children}
         </QueryProviders>
         
           
         </header>
-        {children}
+        {/* {children} */}
       </body>
     </html>
     </ClerkProvider>
