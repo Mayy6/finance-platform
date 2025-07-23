@@ -81,7 +81,6 @@ export const AccountForm = ({
     <Button className="w-full bg-purple-700" disabled={disabled}>
         {id ? 'Save Account' : 'Create Account'}
     </Button>
-    <Button type='submit'>hello</Button>
     {!!id && (<Button type='button'
             disabled={disabled}
             onClick={handleDelete}

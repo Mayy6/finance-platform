@@ -15,6 +15,13 @@
       "when": 1752049897162,
       "tag": "0001_amused_lionheart",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1752726986073,
+      "tag": "0002_clumsy_blazing_skull",
+      "breakpoints": true
     }
   ]
 }

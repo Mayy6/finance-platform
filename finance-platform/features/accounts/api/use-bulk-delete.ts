@@ -4,10 +4,10 @@ import {client} from "@/lib/hono";
 import { toast } from "sonner";
 import { id } from "zod/v4/locales";
 // InferResponseType and InferRequestType are utility types to infer the types of request and response from the Hono client.
-type ResponseType = InferResponseType<typeof client.api.accounts.$post>
-type RequestType = InferRequestType<typeof client.api.accounts.$post>["json"]
+type ResponseType = InferResponseType<typeof client.api.accounts["bulk"]["$post"]>
+type RequestType = InferRequestType<typeof client.api.accounts["bulk"]["$post"]>["json"]
 
-export const useCreateAccounts = () => {
+export const useBulkDelete = () => {
   const queryClient = useQueryClient();
 
     // useMutation is a hook from React Query that allows you to perform mutations (like POST requests) and manage their state.
@@ -16,7 +16,7 @@ export const useCreateAccounts = () => {
     console.log("------------------");
     // const data = {id: "eee", name:"test", user_id: "fff"};
     // return data;
-    const response = await client.api.accounts.$post({ json });
+    const response = await client.api.accounts["bulk"]["$post"]({ json });
         // const a = await response.json();
         // console.log("Response from create account:", a);
         // // return a;
@@ -29,14 +29,14 @@ export const useCreateAccounts = () => {
     
     
     onSuccess: async () => {
-        toast.success("Account created successfully");
+        toast.success("Account deleted successfully");
         // every time its gonna re-fetch the accounts data
         // This is useful to keep the UI in sync with the server state.
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
     },
 
     onError: async (error) => {
-        toast.error(`Failed to create account: ${error.message}`);
+        toast.error(`Failed to delete account: ${error.message}`);
         },
   });
 
