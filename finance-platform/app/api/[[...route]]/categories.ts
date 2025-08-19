@@ -1,6 +1,6 @@
 import {Hono} from 'hono';
 import {db} from "@/db/drizzle";
-import { accounts, insertAccountSchema } from '@/db/schema';
+import { categories, insertCategorySchema } from '@/db/schema';
 import {clerkMiddleware, getAuth} from '@hono/clerk-auth';
 import {and, eq, inArray} from 'drizzle-orm';
 import {zValidator} from '@hono/zod-validator';
@@ -18,10 +18,9 @@ const app = new Hono()
 
             
             const data = await db.select({
-                id: accounts.id,
-                name: accounts.name,}
-                
-            ).from(accounts).where(eq(accounts.user_id, auth.userId));
+                id: categories.id,
+                name: categories.name,
+            }).from(categories).where(eq(categories.user_id, auth.userId));
             return c.json({data})
     })
     .get("/:id",
@@ -42,12 +41,12 @@ const app = new Hono()
             }
 
             const [data] = await db.select({
-                id: accounts.id,
-                name: accounts.name,
-            }).from(accounts).where(
+                id: categories.id,
+                name: categories.name,
+            }).from(categories).where(
                 and(
-                    eq(accounts.id, id),
-                    eq(accounts.user_id, auth.userId)
+                    eq(categories.id, id),
+                    eq(categories.user_id, auth.userId)
                 )
             );
 
@@ -65,7 +64,7 @@ const app = new Hono()
 
         // Validate the request body using zod. if want to insert the acct name we have to 
         // validate if the name is provided and the format of the name is correct.
-        zValidator("json", insertAccountSchema.pick({name: true})),
+        zValidator("json", insertCategorySchema.pick({name: true})),
 
         async (c) => {
             console.log("tttttttttttest")
@@ -80,17 +79,13 @@ const app = new Hono()
                 return c.json({ error: "Invalid name" }, 400);
     }
 
-           const data = await db.insert(accounts).values({
+           const data = await db.insert(categories).values({
             id: crypto.randomUUID(), // Generate a unique id
             user_id: auth.userId, // Associate with the current 
             ...values, // Spread the validated name field
            }).returning();
 
-        // const [data] = await db.insert(accounts).values({
-        //     id: crypto.randomUUID(), // Generate a unique id
-        //     user_id: auth.userId, // Associate with the current user
-        //     name:"test", // Spread the validated name field
-        // }).returning();
+        
 
            console.log("Inserted account:", data);
 
@@ -113,14 +108,14 @@ const app = new Hono()
                 return c.json({error: "Unauthorized"}, 401);
             }
 
-            const data = await db.delete(accounts).where(
+            const data = await db.delete(categories).where(
                 and(
-                    eq(accounts.user_id, auth.userId),
-                    inArray(accounts.id, values.ids)
+                    eq(categories.user_id, auth.userId),
+                    inArray(categories.id, values.ids)
                 )
             )
             .returning({
-                id: accounts.id,
+                id: categories.id,
             })
 
             
@@ -134,7 +129,7 @@ const app = new Hono()
         zValidator("param", z.object({
             id: z.string().optional(),
         })),
-        zValidator("json", insertAccountSchema.pick({name: true})),
+        zValidator("json", insertCategorySchema.pick({name: true})),
         async (c) => {
             const auth = getAuth(c);
             const { id } = c.req.valid("param");
@@ -148,19 +143,19 @@ const app = new Hono()
                 return c.json({error: "Account ID is required"}, 400);
             }
 
-            const [data] = await db.update(accounts)
+            const [data] = await db.update(categories)
                 .set({
                     name: values.name,
                 })
                 .where(
                     and(
-                        eq(accounts.id, id),
-                        eq(accounts.user_id, auth.userId)
+                        eq(categories.id, id),
+                        eq(categories.user_id, auth.userId)
                     )
                 )
                 .returning({
-                    id: accounts.id,
-                    name: accounts.name,
+                    id: categories.id,
+                    name: categories.name,
                 });
 
             if (!data) {
@@ -188,16 +183,16 @@ const app = new Hono()
                 return c.json({error: "Account ID is required"}, 400);
             }
 
-            const [data] = await db.delete(accounts)
+            const [data] = await db.delete(categories)
                 .where(
                     and(
-                        eq(accounts.id, id),
-                        eq(accounts.user_id, auth.userId)
+                        eq(categories.id, id),
+                        eq(categories.user_id, auth.userId)
                     )
                 )
                 .returning({
-                    id: accounts.id,
-                    
+                    id: categories.id,
+                    name: categories.name,
                 });
 
             if (!data) {

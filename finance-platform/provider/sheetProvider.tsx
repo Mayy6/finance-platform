@@ -2,6 +2,7 @@
 
 import { NewAccountSheet } from "@/features/accounts/api/components/new-account-sheet";
 import {useState, useEffect} from "react";
+import { EditAccountSheet } from "@/features/accounts/api/components/edit-account-sheet";
 export const SheetProvider = () =>{
     const [isOpen, setIsOpen] = useState(false);
     useEffect(() => {
@@ -17,5 +18,6 @@ export const SheetProvider = () =>{
     return (
         <>
         <NewAccountSheet />
+        <EditAccountSheet />
         </>)
 }
