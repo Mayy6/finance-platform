@@ -8,8 +8,8 @@ import {
 } from "@/components/ui/sheet";
 
 import { CategoryForm } from "./category-form";
-import { useCreateAccounts } from "@/features/accounts/api/use-create-accounts";
-import { insertAccountSchema } from "@/db/schema";
+import { useCreateCategories } from "@/features/categories/api/use-create-categories";
+import { insertCategorySchema } from "@/db/schema";
 import { z } from "zod";
 import { useOpenCategories } from "../../hooks/use-open-categories";
 import { useGetCategory } from "../use-get-category";
@@ -18,13 +18,13 @@ import { useEditCategories } from "../use-edit-categories";
 import { useDeleteCategories } from "../use-delete-categories";
 import { useConfirm } from "@/hooks/useConfirm";
 
-const formSchema = insertAccountSchema.pick({
+const formSchema = insertCategorySchema.pick({
     name: true,
 });
 type FormSchema = z.input<typeof formSchema>;
 
 
-export function EditAccountSheet() {
+export function EditCategoriesSheet() {
     // distrcture the isOpen and onClose from the useNewAcct hook
     // isOpen is a boolean that indicates if the sheet is open or not
     // onClose is a function that will close the sheet when called

@@ -9,7 +9,7 @@ import {
 
 import { useNewCate } from "../../hooks/use-new-categories";
 import { CategoryForm } from "./category-form";
-import { useCreateAccounts } from "@/features/accounts/api/use-create-accounts";
+import { useCreateCategories } from "@/features/categories/api/use-create-categories";
 import { insertAccountSchema } from "@/db/schema";
 import { z } from "zod";
 const formSchema = insertAccountSchema.pick({

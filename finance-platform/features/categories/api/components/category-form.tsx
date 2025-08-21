@@ -4,7 +4,7 @@ import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import  {insertAccountSchema} from '@/db/schema';
+import  {insertCategorySchema} from '@/db/schema';
 import {
     Form,
     FormControl,
@@ -20,7 +20,7 @@ import { useCreateCategories } from '../use-create-categories';
 
 // the form schema is used to validate the form data before submitting it
 // and it is used name field in the form
-const formSchema = insertAccountSchema.pick({
+const formSchema = insertCategorySchema.pick({
     name: true,
 });
 type FormSchema = z.input<typeof formSchema>;
@@ -47,7 +47,7 @@ export const CategoryForm = ({
     });
 
     const handleSubmit = (values: FormSchema) => {
-            console.log("AccountForm handleSubmit values:", {values});
+            console.log("CategoryForm handleSubmit values:", {values});
 
         onSubmit(values);
     };
@@ -67,7 +67,7 @@ export const CategoryForm = ({
                 control={form.control}
                 render={({field}) =>(
                     <FormItem>
-                        <FormLabel>Account Name</FormLabel>
+                        <FormLabel>Category Name</FormLabel>
                         <FormControl>
                             <Input
                                 
@@ -79,7 +79,7 @@ export const CategoryForm = ({
                         </FormItem>
     )}></FormField>
     <Button className="w-full bg-purple-700" disabled={disabled}>
-        {id ? 'Save Account' : 'Create Account'}
+        {id ? 'Save Category' : 'Create Category'}
     </Button>
     {!!id && (<Button type='button'
             disabled={disabled}
@@ -87,7 +87,7 @@ export const CategoryForm = ({
             className='w-full'
             variant="purpleOutline">
                 <Trash className="mr-2 h-4 w-4" />
-                Delete Account
+                Delete Category
             </Button>)
             }
     </form>
