@@ -22,7 +22,7 @@ export function NewAccountSheet() {
     // isOpen is a boolean that indicates if the sheet is open or not
     // onClose is a function that will close the sheet when called
     const { isOpen, onClose } = useNewCate();
-    const mutation = useCreateAccounts();
+    const mutation = useCreateCategories();
     const onSubmit = (values: FormSchema) => { 
             console.log("NewAccountSheet onSubmit values:", values);
 
