@@ -13,7 +13,7 @@ import { Actions } from "./actions"
 // You can use a Zod schema here if you want.
    
 //  only get the success response type back instead of getting both success and error response types
-export type res = InferResponseType<typeof client.api.accounts.$get, 200>["data"][0]
+export type res = InferResponseType<typeof client.api.categories.$get, 200>["data"][0]
 
 export const columns: ColumnDef<res>[] = [
     {

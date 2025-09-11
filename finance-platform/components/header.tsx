@@ -14,7 +14,7 @@ const header = () => {
             <Headerlogo />
             <Navigation />
           </div>
-          <UserButton afterSignOutUrl="/" className="z-30" />
+          <UserButton afterSignOutUrl="/" />
         </div>
         <div className="mt-6 px-4">
           <Welcome />

@@ -10,14 +10,14 @@ import {
 import { useNewCate } from "../../hooks/use-new-categories";
 import { CategoryForm } from "./category-form";
 import { useCreateCategories } from "@/features/categories/api/use-create-categories";
-import { insertAccountSchema } from "@/db/schema";
+import { insertCategorySchema } from "@/db/schema";
 import { z } from "zod";
-const formSchema = insertAccountSchema.pick({
+const formSchema = insertCategorySchema.pick({
     name: true,
 });
 type FormSchema = z.input<typeof formSchema>;
 
-export function NewAccountSheet() {
+export function NewCategorySheet() {
     // distrcture the isOpen and onClose from the useNewCate hook
     // isOpen is a boolean that indicates if the sheet is open or not
     // onClose is a function that will close the sheet when called
@@ -32,6 +32,8 @@ export function NewAccountSheet() {
     }
     return (
         <Sheet open ={isOpen} onOpenChange={onClose}>
+        
+        
             {/* <SheetTrigger asChild>
                 <button className="btn btn-primary">New Account</button>
             </SheetTrigger> */}

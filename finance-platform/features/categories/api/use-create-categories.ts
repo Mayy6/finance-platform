@@ -10,7 +10,8 @@ type RequestType = InferRequestType<typeof client.api.categories.$post>["json"]
 export const useCreateCategories = () => {
   const queryClient = useQueryClient();
 
-    // useMutation is a hook from React Query that allows you to perform mutations (like POST requests) and manage their state.
+    // useMutati
+    // on is a hook from React Query that allows you to perform mutations (like POST requests) and manage their state.
   const mutation = useMutation<ResponseType, Error, RequestType>({
     mutationFn: async (json) => {
     console.log("------------------");

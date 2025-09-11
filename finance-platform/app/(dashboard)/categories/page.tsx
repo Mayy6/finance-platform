@@ -9,27 +9,27 @@ import {
 import { fr } from 'zod/v4/locales'
 import { Button } from '@/components/ui/button'
 import {Loader2, Plus} from 'lucide-react'
-import { useNewAcct } from '@/features/accounts/hooks/use-new-acct'
+import { useNewCate } from '@/features/categories/hooks/use-new-categories'
 
 import { columns } from "./columns"
 import { DataTable } from '@/components/data-table'
 import { InferResponseType } from 'hono'
 import { client } from '@/lib/hono'
 import { use } from 'react'
-import { useGetAccounts } from '@/features/accounts/api/use-get-accounts'
+import { useGetCategories } from '@/features/categories/api/use-get-categories'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useBulkDelete } from '@/features/accounts/api/use-bulk-delete'
+import { useBulkDelete } from '@/features/categories/api/use-bulk-delete'
 import { RowPagination } from '@tanstack/react-table'
 
 const Categoriespage = () => {
-    const newAccount = useNewAcct();
-    const accountsQuery = useGetAccounts();
+    const newCategory = useNewCate();
+    const categoriesQuery = useGetCategories();
     const deleteAcct = useBulkDelete();
-    const accounts = accountsQuery.data || [];
+    const categories = categoriesQuery.data || [];
     
-    const isDisabled = accountsQuery.isLoading || deleteAcct.isPending;
+    const isDisabled = categoriesQuery.isLoading || deleteAcct.isPending;
 
-    if (accountsQuery.isLoading) {
+    if (categoriesQuery.isLoading) {
       return (
         <div className='max-w-screen-2xl mx-auto w-full pd-8 -mt-26'>
           <Card className='border-none drop-shadow-sm w-full'>
@@ -55,13 +55,13 @@ const Categoriespage = () => {
                 {/* <CardDescription>
                     Manage your financial accounts here.
                 </CardDescription> */}
-                <Button onClick={newAccount.onOpen} variant={'purplebg'} size='sm' className='px-2 py-1 text-sm'>
+                <Button onClick={newCategory.onOpen} variant={'purplebg'} size='sm' className='px-2 py-1 text-sm'>
                     <Plus />Add New</Button>
             </CardHeader>
             <CardContent>
                 <DataTable 
                 columns={columns} 
-                data={accounts} 
+                data={categories} 
                 onDelete={(row) => {
                   // row is an array of selected rows
                   // we need to extract the ids from the rows
